@@ -8,7 +8,7 @@ const productSchema = new mongoose.Schema({
     stock: { type: Number, required: true },
     price: { type: Number, required: true },
     deliveryTime: { type: String },
-    images: { type: [String], default: [] }, // Array of image URLs
+    images: { type: [String], required:true }, // Array of image URLs
 },);
 
 const specialproductModel = mongoose.model("specialProduct", productSchema);
