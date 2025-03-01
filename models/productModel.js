@@ -4,7 +4,6 @@ const productSchema = new mongoose.Schema({
     name: { type: String, required: true },
     description: { type: String },
     brand: { type: String, required: true },
-    condition: { type: String, enum: ["New", "Used"], required: true },
     reference: { type: String, unique: true, required: true },
     stock: { type: Number, required: true },
     price: { type: Number, required: true },

@@ -1,26 +1,4 @@
-import productModel from "../models/productModel.js";
-
-// Get all products
-export const getAllProducts = async () => {
-    try {
-        return await productModel.find();
-    } catch (error) {
-        throw new Error(`Error fetching products: ${error.message}`);
-    }
-};
-
-// Get product by ID
-export const getProductById = async (id) => {
-    try {
-        const product = await productModel.findById(id);
-        if (!product) {
-            throw new Error("Product not found");
-        }
-        return product;
-    } catch (error) {
-        throw new Error(`Error fetching product: ${error.message}`);
-    }
-};
+import productModel from "../models/productModel.js"; // Adjust the path as per your folder structure
 
 // Create a new product
 export const createProduct = async (productData) => {
@@ -32,27 +10,37 @@ export const createProduct = async (productData) => {
     }
 };
 
-// Update a product by ID
-export const updateProduct = async (id, updatedData) => {
+// Get all products
+export const getAllProducts = async () => {
     try {
-        const updatedProduct = await productModel.findByIdAndUpdate(id, updatedData, { new: true });
-        if (!updatedProduct) {
-            throw new Error("Product not found");
-        }
-        return updatedProduct;
+        return await productModel.find();
+    } catch (error) {
+        throw new Error(`Error fetching products: ${error.message}`);
+    }
+};
+
+// Get a single product by ID
+export const getProductById = async (productId) => {
+    try {
+        return await productModel.findById(productId);
+    } catch (error) {
+        throw new Error(`Product not found: ${error.message}`);
+    }
+};
+
+// Update a product by ID
+export const updateProduct = async (productId, updateData) => {
+    try {
+        return await productModel.findByIdAndUpdate(productId, updateData, { new: true });
     } catch (error) {
         throw new Error(`Error updating product: ${error.message}`);
     }
 };
 
 // Delete a product by ID
-export const deleteProduct = async (id) => {
+export const deleteProduct = async (productId) => {
     try {
-        const deletedProduct = await productModel.findByIdAndDelete(id);
-        if (!deletedProduct) {
-            throw new Error("Product not found");
-        }
-        return { message: "Product deleted successfully" };
+        return await productModel.findByIdAndDelete(productId);
     } catch (error) {
         throw new Error(`Error deleting product: ${error.message}`);
     }
