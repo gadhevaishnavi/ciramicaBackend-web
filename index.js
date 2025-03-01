@@ -10,6 +10,9 @@ dotenv.config(); // Load environment variables
 const app = express();
 const PORT = process.env.PORT || 6000;
 
+// Connect to the database
+dbConnect(process.env.DBURL, process.env.DBNAME);
+
 // Middleware
 app.use(cors());
 app.use(express.json());
@@ -17,8 +20,7 @@ app.use(express.json());
 // Serve uploaded images
 app.use("/uploads", express.static("uploads"));
 
-// Connect to the database
-dbConnect(process.env.DBURL, process.env.DBNAME);
+
 
 // Routes
 app.use("/product", productRoute);
